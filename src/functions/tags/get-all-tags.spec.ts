@@ -6,8 +6,8 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { integrationTest, TEST_AUTH_TOKEN, TEST_BASE_API_CONTEXT, unitTest } from '~/tests';
 import { fetch } from '~/functions/utils';
+import { integrationTest, TEST_AUTH_TOKEN, TEST_BASE_API_CONTEXT, unitTest } from '~/tests';
 import { makeGetAllTags } from './get-all-tags';
 
 describe('getAllTags()', () => {

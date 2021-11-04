@@ -6,8 +6,8 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { integrationTest, TEST_AUTH_TOKEN, TEST_BASE_API_CONTEXT, unitTest } from '~/tests';
 import { fetch } from '~/functions/utils';
+import { integrationTest, TEST_AUTH_TOKEN, TEST_BASE_API_CONTEXT, unitTest } from '~/tests';
 import { makeSubscribeToManySystemInformations } from './subscribe-to-many-system-informations';
 
 const wait = (n: number) => new Promise(resolve => setTimeout(resolve, n));
