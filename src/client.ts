@@ -115,7 +115,7 @@ export class GravwellClient {
 	protected _authToken$ = new BehaviorSubject<string | null>(this._authToken);
 	public readonly authToken$ = this._authToken$.asObservable();
 
-	private readonly _options: GravwellClientOptions;
+	private readonly _initialOptions: GravwellClientOptions;
 
 	private readonly _context$: Observable<APIContext> = combineLatest(
 		this.host$,
@@ -126,7 +126,7 @@ export class GravwellClient {
 			host,
 			useEncryption,
 			authToken,
-			fetch: this._options.fetch ?? fetch,
+			fetch: this._initialOptions.fetch ?? fetch,
 		})),
 		distinctUntilChanged((a, b) => isEqual(a, b)),
 		shareReplay(1),
@@ -146,7 +146,7 @@ export class GravwellClient {
 
 	constructor(host: string, options: GravwellClientOptions = {}) {
 		this.host = host;
-		this._options = options;
+		this._initialOptions = options;
 		if (!isUndefined(options.useEncryption)) this.useEncryption = options.useEncryption;
 		if (!isUndefined(options.authToken)) this.authenticate(options.authToken);
 
@@ -159,7 +159,7 @@ export class GravwellClient {
 			host: this.host,
 			useEncryption: this.useEncryption,
 			authToken: this.authToken,
-			fetch: this._options.fetch ?? fetch,
+			fetch: this._initialOptions.fetch ?? fetch,
 		};
 		this._tags = createTagsService(initialContext);
 		this._system = createSystemService(initialContext);
