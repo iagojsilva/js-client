@@ -12,3 +12,4 @@ export * from './token-creation-request';
 export * from './error';
 export * from './existing-token-info';
 export * from './token-created-response';
+export * from './is-token';
