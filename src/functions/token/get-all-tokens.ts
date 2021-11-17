@@ -9,7 +9,7 @@
 import { ExistingTokenInfo } from '~/models';
 import { APIContext, buildHTTPRequestWithAuthFromContext, buildURL, parseJSONResponse } from '../utils';
 
-export const makeGetAllToken = (context: APIContext) => {
+export const makeGetAllTokens = (context: APIContext) => {
 	const path = '/api/tokens?admin=true';
 	const url = buildURL(path, { ...context, protocol: 'http' });
 
