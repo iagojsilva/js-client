@@ -62,3 +62,6 @@ enum _TokenCapability {
 }
 
 export type TokenCapability = keyof typeof _TokenCapability;
+export const isTokenCapability = (value: any): value is TokenCapability => {
+	return value in _TokenCapability;
+};
