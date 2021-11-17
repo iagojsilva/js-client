@@ -15,6 +15,6 @@ import { TokenCapability } from './token-capability';
 export interface UpdatableToken {
 	id: UUID;
 	name: string;
-	descriptions?: string;
+	description?: string;
 	capabilities: Array<TokenCapability>;
 }
