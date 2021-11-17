@@ -6,7 +6,7 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { TokenCreationRequest, isToken, UpdatableToken, ExistingTokenInfo } from '~/models';
+import { ExistingTokenInfo, isToken, TokenCreationRequest, UpdatableToken } from '~/models';
 import { integrationTest, myCustomMatchers, TEST_BASE_API_CONTEXT } from '~/tests';
 import { makeCreateOneToken } from './create-one-token';
 import { makeDeleteOneToken } from './delete-one-token';

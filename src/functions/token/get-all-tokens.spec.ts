@@ -6,7 +6,7 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { TokenCreationRequest, isToken } from '~/models';
+import { isToken, TokenCreationRequest } from '~/models';
 import { integrationTest, TEST_BASE_API_CONTEXT } from '~/tests';
 import { makeCreateOneToken } from './create-one-token';
 import { makeDeleteOneToken } from './delete-one-token';
