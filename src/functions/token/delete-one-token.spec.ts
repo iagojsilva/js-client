@@ -20,13 +20,13 @@ describe('deleteOneToken()', () => {
 	const getOneToken = makeGetOneToken(TEST_BASE_API_CONTEXT);
 
 	beforeEach(async () => {
-		// Delete all saved queries
+		// Delete all tokens
 		const currentTokens = await getAllTokens();
 		const currentTokenIDs = currentTokens.map(m => m.id);
 		const deletePromises = currentTokenIDs.map(TokenID => deleteOneToken(TokenID));
 		await Promise.all(deletePromises);
 
-		// Create two saved queries
+		// Create two tokens
 		const creatableTokens: Array<TokenCreationRequest> = [
 			{
 				name: 'T1',
