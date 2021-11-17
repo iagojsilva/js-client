@@ -6,7 +6,7 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { TokenCreationRequest, TokenCreatedResponse } from '~/models';
+import { TokenCreatedResponse, TokenCreationRequest } from '~/models';
 import {
 	APIContext,
 	buildHTTPRequestWithAuthFromContext,
