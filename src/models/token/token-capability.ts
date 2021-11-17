@@ -3,7 +3,7 @@
  * REFERENCE: https://github.com/gravwell/gravwell/blob/dev/client/types/abac.go
  */
 
-enum _Capabilities {
+enum _TokenCapability {
 	'Search',
 	'Download',
 	'SaveSearch',
@@ -53,4 +53,4 @@ enum _Capabilities {
 	'TokenWrite',
 }
 
-export type Capabilities = keyof typeof _Capabilities;
+export type TokenCapability = keyof typeof _TokenCapability;

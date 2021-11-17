@@ -1,11 +1,9 @@
-import { UUID } from '~/value-objects';
 import { TokenCapability } from './token-capability';
 
-/**
- * Updatable token fields.
+/*
+ * Minimun data required to create a token
  */
-export interface UpdatableToken {
-	id: UUID;
+export interface TokenCreationRequest {
 	name: string;
 	descriptions?: string;
 	capabilities: Array<TokenCapability>;

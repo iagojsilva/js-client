@@ -6,19 +6,19 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { Token } from '~/models';
+import { ExistingTokenInfo } from '~/models';
 import { UUID } from '~/value-objects';
 import { APIContext, buildHTTPRequestWithAuthFromContext, buildURL, parseJSONResponse } from '../utils';
 
 export const makeGetOneToken = (context: APIContext) => {
-	return async (tokenID: UUID): Promise<Token> => {
+	return async (tokenID: UUID): Promise<ExistingTokenInfo> => {
 		const templatePath = '/api/tokens/{tokenID}';
 		const url = buildURL(templatePath, { ...context, protocol: 'http', pathParams: { tokenID } });
 
 		const req = buildHTTPRequestWithAuthFromContext(context);
 
 		const raw = await context.fetch(url, { ...req, method: 'GET' });
-		const rawRes = await parseJSONResponse<Token>(raw);
+		const rawRes = await parseJSONResponse<ExistingTokenInfo>(raw);
 		return rawRes;
 	};
 };
