@@ -31,7 +31,7 @@ describe('getOneToken()', () => {
 		// Create a Token
 		const data: TokenCreationRequest = {
 			name: 'T1',
-			descriptions: 'My T1',
+			description: 'My T1',
 			capabilities: ['AttachSearch', 'KitWrite'],
 		};
 		createdToken = await createOneToken(data);
