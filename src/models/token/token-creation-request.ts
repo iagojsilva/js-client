@@ -13,6 +13,6 @@ import { TokenCapability } from './token-capability';
  */
 export interface TokenCreationRequest {
 	name: string;
-	descriptions?: string;
+	description?: string;
 	capabilities: Array<TokenCapability>;
 }
