@@ -89,7 +89,7 @@ describe('getTokensAuthorizedToMe()', () => {
 	});
 
 	xit(
-		'Returns all my tokens',
+		'Should returns all my tokens',
 		integrationTest(async () => {
 			const actualAdminTokens = await getTokensAuthorizedToMe();
 			expect(sortBy(actualAdminTokens, m => m.id)).toEqual(sortBy(adminTokens, m => m.id));

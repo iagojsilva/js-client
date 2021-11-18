@@ -15,7 +15,7 @@ describe('ListTokenCapabilities()', () => {
 	const listTokenCapabilities = makeListTokenCapabilities(TEST_BASE_API_CONTEXT);
 
 	it(
-		'Returns all token capabilities',
+		'Should returns all token capabilities',
 		integrationTest(async () => {
 			const tokensCapabilities = await listTokenCapabilities();
 			const isTokensCapabilities = tokensCapabilities.map(isTokenCapability).every(isBoolean);

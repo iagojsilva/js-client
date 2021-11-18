@@ -11,7 +11,7 @@
  * REFERENCE: https://github.com/gravwell/gravwell/blob/dev/client/types/abac.go
  */
 
-enum _TokenCapability {
+export enum _TokenCapability {
 	'Search',
 	'Download',
 	'SaveSearch',
@@ -62,6 +62,3 @@ enum _TokenCapability {
 }
 
 export type TokenCapability = keyof typeof _TokenCapability;
-export const isTokenCapability = (value: any): value is TokenCapability => {
-	return value in _TokenCapability;
-};

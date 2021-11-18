@@ -11,7 +11,7 @@ import { isArray } from 'lodash';
 import { TokenCreatedResponse } from '~/main';
 import { isNumericID, isUUID } from '~/value-objects';
 
-export const isToken = (value: any): value is TokenCreatedResponse => {
+export const isToken = (value: unknown): value is TokenCreatedResponse => {
 	try {
 		const q = <TokenCreatedResponse>value;
 		return (

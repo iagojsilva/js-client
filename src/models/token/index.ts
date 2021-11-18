@@ -13,3 +13,4 @@ export * from './error';
 export * from './existing-token-info';
 export * from './token-created-response';
 export * from './is-token';
+export * from './is-token-capability';
