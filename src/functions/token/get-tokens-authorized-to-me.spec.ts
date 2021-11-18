@@ -7,7 +7,7 @@
  **************************************************************************/
 
 import { random, sortBy } from 'lodash';
-import { TokenCreationRequest, CreatableUser, isToken, ExistingTokenInfo, User } from '~/models';
+import { CreatableUser, ExistingTokenInfo, isToken, TokenCreationRequest, User } from '~/models';
 import { integrationTest, TEST_BASE_API_CONTEXT } from '~/tests';
 import { makeLoginOneUser } from '../auth/login-one-user';
 import { makeCreateOneUser } from '../users';
