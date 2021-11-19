@@ -17,9 +17,9 @@ import { TokenCapability } from './token-capability';
 export interface ExistingTokenInfo {
 	id: UUID;
 	name: string;
-	description?: string;
+	description: string | null;
 	uuid: number;
-	createdAt: string; // better type?
-	expireAt?: Date;
+	createdAt: string;
+	expireAt: string | null;
 	capabilities: Array<TokenCapability>;
 }

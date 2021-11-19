@@ -9,11 +9,11 @@
 import { TokenCapability } from './token-capability';
 
 /*
- * Minimun data required to create a token
+ * Minimum data required to create a token
  */
 export interface TokenCreationRequest {
 	name: string;
-	description?: string;
+	description: string | null;
 	capabilities: Array<TokenCapability>;
-	expiresAt?: string;
+	expiresAt: string | null;
 }

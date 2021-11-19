@@ -6,8 +6,6 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { UUID } from '~/value-objects';
-import { TokenCapability } from './token-capability';
 import { TokenCreationRequest } from './token-creation-request';
 
 /**
