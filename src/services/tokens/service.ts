@@ -14,7 +14,7 @@ import {
 	UpdatableToken,
 } from '~/models';
 
-export interface TokenService {
+export interface TokensService {
 	readonly get: {
 		readonly one: (tokenID: string) => Promise<ExistingTokenInfo>;
 		readonly all: () => Promise<Array<ExistingTokenInfo>>;

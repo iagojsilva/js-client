@@ -11,4 +11,5 @@ export * from './delete-one-token';
 export * from './get-all-tokens';
 export * from './get-one-token';
 export * from './get-tokens-authorized-to-me';
+export * from './list-token-capabilities';
 export * from './update-one-token';

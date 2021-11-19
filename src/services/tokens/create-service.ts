@@ -12,13 +12,13 @@ import {
 	makeGetAllTokens,
 	makeGetOneToken,
 	makeGetTokensAuthorizedToMe,
+	makeListTokenCapabilities,
 	makeUpdateOneToken,
-} from '~/functions/token';
-import { makeListTokenCapabilities } from '~/functions/token/list-token-capabilities';
+} from '~/functions/tokens';
 import { APIContext } from '~/functions/utils';
-import { TokenService } from './service';
+import { TokensService } from './service';
 
-export const createTokenService = (context: APIContext): TokenService => ({
+export const createTokensService = (context: APIContext): TokensService => ({
 	get: {
 		one: makeGetOneToken(context),
 		all: makeGetAllTokens(context),
