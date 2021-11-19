@@ -13,10 +13,11 @@ import {
 	TokenCreationRequest,
 	UpdatableToken,
 } from '~/models';
+import { ID } from '~/value-objects';
 
 export interface TokensService {
 	readonly get: {
-		readonly one: (tokenID: string) => Promise<ExistingTokenInfo>;
+		readonly one: (tokenID: ID) => Promise<ExistingTokenInfo>;
 		readonly all: () => Promise<Array<ExistingTokenInfo>>;
 		readonly authorizedTo: {
 			readonly me: () => Promise<Array<ExistingTokenInfo>>;
@@ -33,6 +34,6 @@ export interface TokensService {
 	};
 
 	readonly delete: {
-		readonly one: (tokenID: string) => Promise<void>;
+		readonly one: (tokenID: ID) => Promise<void>;
 	};
 }
