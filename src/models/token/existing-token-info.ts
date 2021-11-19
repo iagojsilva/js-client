@@ -20,5 +20,6 @@ export interface ExistingTokenInfo {
 	description?: string;
 	uuid: number;
 	createdAt: string; // better type?
+	expireAt?: Date;
 	capabilities: Array<TokenCapability>;
 }

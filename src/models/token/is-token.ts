@@ -20,7 +20,8 @@ export const isToken = (value: unknown): value is TokenCreatedResponse => {
 			isString(q.name) &&
 			(isString(q.description) || isNull(q.description)) &&
 			isString(q.createdAt) &&
-			isArray(q.capabilities)
+			isArray(q.capabilities) &&
+			(isString(q.expireAt) || isNull(q.expireAt))
 		);
 	} catch {
 		return false;

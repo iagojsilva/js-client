@@ -8,13 +8,9 @@
 
 import { UUID } from '~/value-objects';
 import { TokenCapability } from './token-capability';
+import { TokenCreationRequest } from './token-creation-request';
 
 /**
  * Updatable token fields.
  */
-export interface UpdatableToken {
-	id: UUID;
-	name: string;
-	description?: string;
-	capabilities: Array<TokenCapability>;
-}
+export interface UpdatableToken extends TokenCreationRequest {}

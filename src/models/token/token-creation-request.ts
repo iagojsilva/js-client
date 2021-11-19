@@ -15,4 +15,5 @@ export interface TokenCreationRequest {
 	name: string;
 	description?: string;
 	capabilities: Array<TokenCapability>;
+	expiresAt?: string;
 }
