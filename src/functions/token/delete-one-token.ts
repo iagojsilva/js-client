@@ -12,7 +12,7 @@ import { APIContext, buildHTTPRequestWithAuthFromContext, buildURL, parseJSONRes
 export const makeDeleteOneToken = (context: APIContext) => {
 	return async (tokenID: UUID): Promise<void> => {
 		// TODO: admin??????????????????????????????????????????????????????ww
-		const templatePath = '/api/tokens/{tokenID}';
+		const templatePath = '/api/tokens/{tokenID}?admin=true';
 		const url = buildURL(templatePath, { ...context, protocol: 'http', pathParams: { tokenID } });
 
 		const req = buildHTTPRequestWithAuthFromContext(context);
