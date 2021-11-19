@@ -6,9 +6,12 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
+import { UUID } from '~/value-objects';
 import { TokenCreationRequest } from './token-creation-request';
 
 /**
  * Updatable token fields.
  */
-export interface UpdatableToken extends TokenCreationRequest {}
+export interface UpdatableToken extends TokenCreationRequest {
+	id: UUID;
+}
