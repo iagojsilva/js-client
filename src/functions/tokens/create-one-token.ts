@@ -6,7 +6,7 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { TokenCreatedResponse, TokenCreationRequest } from '~/models';
+import { CreatableToken, TokenWithSecret } from '~/models';
 import {
 	APIContext,
 	buildHTTPRequestWithAuthFromContext,
@@ -19,7 +19,7 @@ export const makeCreateOneToken = (context: APIContext) => {
 	const templatePath = '/api/tokens?admin=true';
 	const url = buildURL(templatePath, { ...context, protocol: 'http' });
 
-	return async (data: TokenCreationRequest): Promise<TokenCreatedResponse> => {
+	return async (data: CreatableToken): Promise<TokenWithSecret> => {
 		try {
 			const baseRequestOptions: HTTPRequestOptions = {
 				body: JSON.stringify(data),
@@ -27,7 +27,7 @@ export const makeCreateOneToken = (context: APIContext) => {
 			const req = buildHTTPRequestWithAuthFromContext(context, baseRequestOptions);
 
 			const raw = await context.fetch(url, { ...req, method: 'POST' });
-			const rawRes = await parseJSONResponse<TokenCreatedResponse>(raw);
+			const rawRes = await parseJSONResponse<TokenWithSecret>(raw);
 			return rawRes;
 		} catch (err) {
 			if (err instanceof Error) throw err;

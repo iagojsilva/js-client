@@ -6,8 +6,8 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { _TokenCapability, TokenCapability } from './token-capability';
+import { isString } from 'lodash';
+import { TokenCapability } from './token-capability';
 
-export const isTokenCapability = (value: any): value is TokenCapability => {
-	return value in _TokenCapability;
-};
+export const isTokenCapability = (value: unknown): value is TokenCapability =>
+	isString(value) && value in TokenCapability;

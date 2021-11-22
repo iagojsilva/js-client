@@ -6,31 +6,25 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import {
-	ExistingTokenInfo,
-	TokenCapability,
-	TokenCreatedResponse,
-	TokenCreationRequest,
-	UpdatableToken,
-} from '~/models';
+import { CreatableToken, Token, TokenCapability, TokenWithSecret, UpdatableToken } from '~/models';
 import { ID } from '~/value-objects';
 
 export interface TokensService {
 	readonly get: {
-		readonly one: (tokenID: ID) => Promise<ExistingTokenInfo>;
-		readonly all: () => Promise<Array<ExistingTokenInfo>>;
+		readonly one: (tokenID: ID) => Promise<Token>;
+		readonly all: () => Promise<Array<Token>>;
 		readonly authorizedTo: {
-			readonly me: () => Promise<Array<ExistingTokenInfo>>;
+			readonly me: () => Promise<Array<Token>>;
 		};
 		readonly tokenCapabilities: () => Promise<Array<TokenCapability>>;
 	};
 
 	readonly create: {
-		readonly one: (data: TokenCreationRequest) => Promise<TokenCreatedResponse>;
+		readonly one: (data: CreatableToken) => Promise<TokenWithSecret>;
 	};
 
 	readonly update: {
-		readonly one: (data: UpdatableToken) => Promise<ExistingTokenInfo>;
+		readonly one: (data: UpdatableToken) => Promise<Token>;
 	};
 
 	readonly delete: {

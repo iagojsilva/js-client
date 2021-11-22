@@ -6,7 +6,7 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { isToken, TokenCreationRequest } from '~/models';
+import { CreatableToken, isToken } from '~/models';
 import { integrationTest, TEST_BASE_API_CONTEXT } from '~/tests';
 import { makeCreateOneToken } from './create-one-token';
 import { makeDeleteOneToken } from './delete-one-token';
@@ -29,7 +29,7 @@ describe('getAllTokens()', () => {
 		'Should return all tokens',
 		integrationTest(async () => {
 			// Create two tokens
-			const creatableTokens: Array<TokenCreationRequest> = [
+			const creatableTokens: Array<CreatableToken> = [
 				{
 					name: 'Q1',
 					capabilities: ['KitWrite'],

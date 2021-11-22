@@ -6,22 +6,23 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { isNull, isString } from '@lucaspaganini/value-objects/dist/utils';
-import { isArray } from 'lodash';
-import { TokenCreatedResponse } from '~/main';
+import { isArray, isNull, isString } from 'lodash';
 import { isNumericID, isUUID } from '~/value-objects';
+import { isTokenCapability } from './is-token-capability';
+import { TokenWithSecret } from './token-with-secret';
 
-export const isToken = (value: unknown): value is TokenCreatedResponse => {
+export const isToken = (value: unknown): value is TokenWithSecret => {
 	try {
-		const q = <TokenCreatedResponse>value;
+		const t = <TokenWithSecret>value;
 		return (
-			isUUID(q.id) &&
-			isNumericID(q.uuid) &&
-			isString(q.name) &&
-			(isString(q.description) || isNull(q.description)) &&
-			isString(q.createdAt) &&
-			isArray(q.capabilities) &&
-			(isString(q.expireAt) || isNull(q.expireAt))
+			isUUID(t.id) &&
+			isNumericID(t.uid) &&
+			isString(t.name) &&
+			(isString(t.description) || isNull(t.description)) &&
+			isString(t.createdAt) &&
+			isArray(t.capabilities) &&
+			t.capabilities.every(isTokenCapability) &&
+			(isString(t.expiresAt) || isNull(t.expiresAt))
 		);
 	} catch {
 		return false;

@@ -44,11 +44,11 @@ import {
 	CreatableScheduledScript,
 	CreatableTargetedNotification,
 	CreatableTemplate,
+	CreatableToken,
 	CreatableUser,
 	Dashboard,
 	DataExplorerEntry,
 	ElementFilter,
-	ExistingTokenInfo,
 	ExplorerSearchSubscription,
 	FileMetadata,
 	GeneratedAutoExtractors,
@@ -77,9 +77,9 @@ import {
 	SystemSettings,
 	TargetedNotificationTargetType,
 	Template,
+	Token,
 	TokenCapability,
-	TokenCreatedResponse,
-	TokenCreationRequest,
+	TokenWithSecret,
 	UpdatableActionable,
 	UpdatableAutoExtractor,
 	UpdatableDashboard,
@@ -462,14 +462,12 @@ describe('GravwellClient', () => {
 			expectTypeOf(client.searchGroups.get.one).toEqualTypeOf<(id: NumericID) => Promise<NumericID>>();
 
 			// Tokens
-			expectTypeOf(client.tokens.get.one).toEqualTypeOf<(tokenID: ID) => Promise<ExistingTokenInfo>>();
-			expectTypeOf(client.tokens.get.all).toEqualTypeOf<() => Promise<Array<ExistingTokenInfo>>>();
-			expectTypeOf(client.tokens.get.authorizedTo.me).toEqualTypeOf<() => Promise<Array<ExistingTokenInfo>>>();
+			expectTypeOf(client.tokens.get.one).toEqualTypeOf<(tokenID: ID) => Promise<Token>>();
+			expectTypeOf(client.tokens.get.all).toEqualTypeOf<() => Promise<Array<Token>>>();
+			expectTypeOf(client.tokens.get.authorizedTo.me).toEqualTypeOf<() => Promise<Array<Token>>>();
 			expectTypeOf(client.tokens.get.tokenCapabilities).toEqualTypeOf<() => Promise<Array<TokenCapability>>>();
-			expectTypeOf(client.tokens.create.one).toEqualTypeOf<
-				(data: TokenCreationRequest) => Promise<TokenCreatedResponse>
-			>();
-			expectTypeOf(client.tokens.update.one).toEqualTypeOf<(data: UpdatableToken) => Promise<ExistingTokenInfo>>();
+			expectTypeOf(client.tokens.create.one).toEqualTypeOf<(data: CreatableToken) => Promise<TokenWithSecret>>();
+			expectTypeOf(client.tokens.update.one).toEqualTypeOf<(data: UpdatableToken) => Promise<Token>>();
 			expectTypeOf(client.tokens.delete.one).toEqualTypeOf<(tokenID: ID) => Promise<void>>();
 		}),
 	);

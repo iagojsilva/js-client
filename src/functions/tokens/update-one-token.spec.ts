@@ -6,7 +6,7 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { ExistingTokenInfo, isToken, TokenCreationRequest, UpdatableToken } from '~/models';
+import { CreatableToken, isToken, Token, UpdatableToken } from '~/models';
 import { integrationTest, myCustomMatchers, TEST_BASE_API_CONTEXT } from '~/tests';
 import { makeCreateOneToken } from './create-one-token';
 import { makeDeleteOneToken } from './delete-one-token';
@@ -19,7 +19,7 @@ describe('updateOneToken()', () => {
 	const deleteOneToken = makeDeleteOneToken(TEST_BASE_API_CONTEXT);
 	const getAllTokens = makeGetAllTokens(TEST_BASE_API_CONTEXT);
 
-	let createdToken: ExistingTokenInfo;
+	let createdToken: Token;
 
 	beforeEach(async () => {
 		jasmine.addMatchers(myCustomMatchers);
@@ -31,7 +31,7 @@ describe('updateOneToken()', () => {
 		await Promise.all(deletePromises);
 
 		// Create one token
-		const data: TokenCreationRequest = {
+		const data: CreatableToken = {
 			name: 'Current name',
 			capabilities: ['KitWrite'],
 		};

@@ -8,9 +8,9 @@
 
 export * from './token-capability';
 export * from './updatable-token';
-export * from './token-creation-request';
-export * from './error';
-export * from './existing-token-info';
-export * from './token-created-response';
+export * from './creatable-token';
+export * from './error-response';
+export * from './token';
+export * from './token-with-secret';
 export * from './is-token';
 export * from './is-token-capability';

@@ -6,19 +6,14 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { TokenCapability } from '~/main';
-import { UUID } from '~/value-objects';
+import { TokenCapability } from './token-capability';
 
 /**
- * Updatable token fields.
- *
- * NOTE: It's ok to update the capabilitites of an existing token because if you have access to update a token, you also have access to create a new one with whatever capabilities you want.
+ * Minimum data required to create a token
  */
-export interface UpdatableToken {
-	id: UUID;
-
+export interface CreatableToken {
 	/**
-	 * The name of the created token
+	 * A name for the token
 	 *
 	 * @example
 	 * "My token"
@@ -26,12 +21,12 @@ export interface UpdatableToken {
 	name: string;
 
 	/**
-	 * Optional token description. May be null or an empty string.
+	 * An optional description for the token
 	 *
 	 * @example
-	 * "My new description"
+	 * "My resource read / resource write token"
 	 */
-	description: string;
+	description: string | null;
 
 	capabilities: Array<TokenCapability>;
 
@@ -39,6 +34,9 @@ export interface UpdatableToken {
 	 * Optional DateTime in RFC3339 indicating that the token should automatically expire.
 	 *
 	 * WARNING: If this property is not included (or is included and set to an empty string ""), that means it won't expire
+	 *
+	 * @example
+	 * "2022-12-31T12:00:00Z"
 	 */
-	expiresAt: string;
+	expiresAt: string | null;
 }

@@ -6,14 +6,9 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { TokenCapability } from './token-capability';
-
-/*
- * Minimum data required to create a token
+/**
+ * Error response for 4xx or 5xx
  */
-export interface TokenCreationRequest {
-	name: string;
-	description: string | null;
-	capabilities: Array<TokenCapability>;
-	expiresAt: string | null;
+export interface ErrorResponse {
+	error: string;
 }
