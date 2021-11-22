@@ -46,7 +46,7 @@ export interface RawToken {
 	/**
 	 * Optional DateTime in RFC3339 indicating that the token should automatically expire.
 	 *
-	 * WARNING: If this property is not included (or is included and set to an empty string ""), that means it won't expire
+	 * WARNING: If this property is not included (or is included and set to `"0001-01-01T00:00:00Z"`), that means it won't expire
 	 *
 	 * @example
 	 * "2022-12-31T12:00:00Z"

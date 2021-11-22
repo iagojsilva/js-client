@@ -38,7 +38,7 @@ export interface RawUpdatableToken {
 	/**
 	 * Optional DateTime in RFC3339 indicating that the token should automatically expire.
 	 *
-	 * WARNING: If this property is not included (or is included and set to an empty string ""), that means it won't expire
+	 * WARNING: If this property is not included (or is included and set to `"0001-01-01T00:00:00Z"`), that means it won't expire
 	 */
 	expiresAt: string | null;
 }
