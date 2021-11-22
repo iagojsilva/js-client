@@ -6,7 +6,7 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { RawToken, RawUpdatableToken } from '~/models';
+import { RawToken, Token, toRawUpdatableToken, toToken, UpdatableToken } from '~/models';
 import {
 	APIContext,
 	buildHTTPRequestWithAuthFromContext,
@@ -19,7 +19,7 @@ import { makeGetOneToken } from './get-one-token';
 export const makeUpdateOneToken = (context: APIContext) => {
 	const getOneToken = makeGetOneToken(context);
 
-	return async (data: RawUpdatableToken): Promise<RawToken> => {
+	return async (data: UpdatableToken): Promise<Token> => {
 		const templatePath = '/api/tokens/{tokenID}?admin=true';
 		const url = buildURL(templatePath, { ...context, protocol: 'http', pathParams: { tokenID: data.id } });
 
@@ -27,13 +27,13 @@ export const makeUpdateOneToken = (context: APIContext) => {
 			const current = await getOneToken(data.id);
 
 			const baseRequestOptions: HTTPRequestOptions = {
-				body: JSON.stringify({ ...current, ...data }),
+				body: JSON.stringify(toRawUpdatableToken(data, current)),
 			};
 			const req = buildHTTPRequestWithAuthFromContext(context, baseRequestOptions);
 
 			const raw = await context.fetch(url, { ...req, method: 'PUT' });
-			const tokenInfoWithoutSecret = await parseJSONResponse<RawToken>(raw);
-			return tokenInfoWithoutSecret;
+			const rawRes = await parseJSONResponse<RawToken>(raw);
+			return toToken(rawRes);
 		} catch (err) {
 			if (err instanceof Error) throw err;
 			throw Error('Unknown error');

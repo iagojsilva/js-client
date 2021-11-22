@@ -7,7 +7,7 @@
  **************************************************************************/
 
 import { random, sortBy } from 'lodash';
-import { RawCreatableToken, CreatableUser, isToken, RawToken, User } from '~/models';
+import { CreatableToken, CreatableUser, isToken, Token, TokenCapability, User } from '~/models';
 import { integrationTest, TEST_BASE_API_CONTEXT } from '~/tests';
 import { makeLoginOneUser } from '../auth/login-one-user';
 import { makeCreateOneUser } from '../users';
@@ -24,11 +24,11 @@ describe('getTokensAuthorizedToMe()', () => {
 	const createOneUser = makeCreateOneUser(TEST_BASE_API_CONTEXT);
 	const login = makeLoginOneUser(TEST_BASE_API_CONTEXT);
 
-	let adminTokens: Array<RawToken>;
+	let adminTokens: Array<Token>;
 
 	let analyst: User;
 	let analystAuth: string;
-	let analystTokens: Array<RawToken>;
+	let analystTokens: Array<Token>;
 
 	beforeEach(async () => {
 		// Delete all tokens
@@ -38,14 +38,14 @@ describe('getTokensAuthorizedToMe()', () => {
 		await Promise.all(deletePromises);
 
 		// Create two tokens as admin
-		const creatableTokens: Array<RawCreatableToken> = [
+		const creatableTokens: Array<CreatableToken> = [
 			{
 				name: 'T1',
-				capabilities: ['KitWrite'],
+				capabilities: [TokenCapability.KitWrite],
 			},
 			{
 				name: 'T2',
-				capabilities: ['Download'],
+				capabilities: [TokenCapability.Download],
 			},
 		];
 		const createPromises = creatableTokens.map(creatable => createOneToken(creatable));
@@ -64,18 +64,18 @@ describe('getTokensAuthorizedToMe()', () => {
 		analystAuth = await login(analyst.username, data.password);
 
 		// Create three tokens as analyst
-		const creatableTokens2: Array<RawCreatableToken> = [
+		const creatableTokens2: Array<CreatableToken> = [
 			{
 				name: 'T1',
-				capabilities: ['KitWrite'],
+				capabilities: [TokenCapability.KitWrite],
 			},
 			{
 				name: 'T2',
-				capabilities: ['Download'],
+				capabilities: [TokenCapability.Download],
 			},
 			{
 				name: 'T3',
-				capabilities: ['Download'],
+				capabilities: [TokenCapability.Download],
 			},
 		];
 

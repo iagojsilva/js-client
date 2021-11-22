@@ -6,7 +6,7 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { RawCreatableToken, isToken, RawToken, RawUpdatableToken } from '~/models';
+import { CreatableToken, isToken, Token, TokenCapability, UpdatableToken } from '~/models';
 import { integrationTest, myCustomMatchers, TEST_BASE_API_CONTEXT } from '~/tests';
 import { makeCreateOneToken } from './create-one-token';
 import { makeDeleteOneToken } from './delete-one-token';
@@ -19,7 +19,7 @@ describe('updateOneToken()', () => {
 	const deleteOneToken = makeDeleteOneToken(TEST_BASE_API_CONTEXT);
 	const getAllTokens = makeGetAllTokens(TEST_BASE_API_CONTEXT);
 
-	let createdToken: RawToken;
+	let createdToken: Token;
 
 	beforeEach(async () => {
 		jasmine.addMatchers(myCustomMatchers);
@@ -31,22 +31,22 @@ describe('updateOneToken()', () => {
 		await Promise.all(deletePromises);
 
 		// Create one token
-		const data: RawCreatableToken = {
+		const data: CreatableToken = {
 			name: 'Current name',
-			capabilities: ['KitWrite'],
+			capabilities: [TokenCapability.KitWrite],
 		};
 		createdToken = await createOneToken(data);
 	});
 
-	const updateTests: Array<Omit<RawUpdatableToken, 'id'>> = [
-		{ name: 'New Name', capabilities: ['KitWrite'] },
-		{ name: 'New Name 2', capabilities: ['UserFileWrite'], description: 'New description' },
-		{ name: 'New Name 3', capabilities: ['SystemInfoRead'], description: 'New description 2' },
-		{ name: 'New Name 3', capabilities: ['Stats'] },
-		{ name: 'New Name 4', capabilities: ['SetSearchGroup'] },
-		{ name: 'New Name 5', capabilities: ['SearchHistory'] },
-		{ name: 'New Name 6', capabilities: ['SearchGroupHistory'], description: 'New description 3' },
-		{ name: 'New Name 7', capabilities: ['SearchAllHistory'], description: 'New description 4' },
+	const updateTests: Array<Omit<UpdatableToken, 'id'>> = [
+		{ name: 'New Name', capabilities: [TokenCapability.KitWrite] },
+		{ name: 'New Name 2', capabilities: [TokenCapability.UserFileWrite], description: 'New description' },
+		{ name: 'New Name 3', capabilities: [TokenCapability.SystemInfoRead], description: 'New description 2' },
+		{ name: 'New Name 3', capabilities: [TokenCapability.Stats] },
+		{ name: 'New Name 4', capabilities: [TokenCapability.SetSearchGroup] },
+		{ name: 'New Name 5', capabilities: [TokenCapability.SearchHistory] },
+		{ name: 'New Name 6', capabilities: [TokenCapability.SearchGroupHistory], description: 'New description 3' },
+		{ name: 'New Name 7', capabilities: [TokenCapability.SearchAllHistory], description: 'New description 4' },
 	];
 	updateTests.forEach((_data, testIndex) => {
 		const updatedFields = Object.keys(_data);
@@ -59,7 +59,7 @@ describe('updateOneToken()', () => {
 				const current = createdToken;
 				expect(isToken(current)).toBeTrue();
 
-				const data: RawUpdatableToken = { ..._data, id: current.id };
+				const data: UpdatableToken = { ..._data, id: current.id };
 				const updated = await updateOneToken(data);
 
 				expect(isToken(updated)).toBeTrue();

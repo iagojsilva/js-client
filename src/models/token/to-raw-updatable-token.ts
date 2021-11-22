@@ -11,7 +11,7 @@ import { RawUpdatableToken } from '~/main';
 import { Token } from './token';
 import { UpdatableToken } from './updatable-token';
 
-export const toRawUpdatableTemplate = (updatable: UpdatableToken, current: Token): RawUpdatableToken => {
+export const toRawUpdatableToken = (updatable: UpdatableToken, current: Token): RawUpdatableToken => {
 	return {
 		id: updatable.id,
 		name: updatable.name ?? current.name,

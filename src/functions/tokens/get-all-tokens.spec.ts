@@ -6,7 +6,7 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { RawCreatableToken, isToken } from '~/models';
+import { CreatableToken, isToken, TokenCapability } from '~/models';
 import { integrationTest, TEST_BASE_API_CONTEXT } from '~/tests';
 import { makeCreateOneToken } from './create-one-token';
 import { makeDeleteOneToken } from './delete-one-token';
@@ -29,14 +29,14 @@ describe('getAllTokens()', () => {
 		'Should return all tokens',
 		integrationTest(async () => {
 			// Create two tokens
-			const creatableTokens: Array<RawCreatableToken> = [
+			const creatableTokens: Array<CreatableToken> = [
 				{
 					name: 'Q1',
-					capabilities: ['KitWrite'],
+					capabilities: [TokenCapability.KitWrite],
 				},
 				{
 					name: 'Q2',
-					capabilities: ['KitWrite'],
+					capabilities: [TokenCapability.KitWrite],
 				},
 			];
 			const createPromises = creatableTokens.map(creatable => createOneToken(creatable));

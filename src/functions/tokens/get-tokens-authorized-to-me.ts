@@ -6,18 +6,18 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { RawToken } from '~/models';
+import { RawToken, Token, toToken } from '~/models';
 import { APIContext, buildHTTPRequestWithAuthFromContext, buildURL, parseJSONResponse } from '../utils';
 
 export const makeGetTokensAuthorizedToMe = (context: APIContext) => {
 	const path = '/api/tokens';
 	const url = buildURL(path, { ...context, protocol: 'http' });
 
-	return async (): Promise<Array<RawToken>> => {
+	return async (): Promise<Array<Token>> => {
 		const req = buildHTTPRequestWithAuthFromContext(context);
 
 		const raw = await context.fetch(url, { ...req, method: 'GET' });
 		const rawRes = (await parseJSONResponse<Array<RawToken> | null>(raw)) ?? [];
-		return rawRes;
+		return rawRes.map(toToken);
 	};
 };

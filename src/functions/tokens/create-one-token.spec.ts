@@ -6,7 +6,7 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { RawCreatableToken, isToken } from '~/models';
+import { CreatableToken, isToken, TokenCapability } from '~/models';
 import { integrationTest, myCustomMatchers, TEST_BASE_API_CONTEXT } from '~/tests';
 import { makeCreateOneToken } from './create-one-token';
 
@@ -20,10 +20,10 @@ describe('createOneToken()', () => {
 	it(
 		'Should create a token and return it',
 		integrationTest(async () => {
-			const data: RawCreatableToken = {
+			const data: CreatableToken = {
 				name: 'name',
 				description: 'description',
-				capabilities: ['KitWrite'],
+				capabilities: [TokenCapability.KitWrite],
 			};
 
 			const token = await createOneToken(data);
