@@ -6,23 +6,23 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { isArray, isNull, isString } from 'lodash';
-import { isNumericID, isUUID } from '~/value-objects';
+import { isArray, isDate, isNull, isString } from 'lodash';
+import { isID, isUUID } from '~/value-objects';
 import { isTokenCapability } from './is-token-capability';
-import { RawTokenWithSecret } from './raw-token-with-secret';
+import { Token } from './token';
 
-export const isToken = (value: unknown): value is RawTokenWithSecret => {
+export const isToken = (value: unknown): value is Token => {
 	try {
-		const t = <RawTokenWithSecret>value;
+		const t = <Token>value;
 		return (
 			isUUID(t.id) &&
-			isNumericID(t.uid) &&
+			isID(t.userID) &&
 			isString(t.name) &&
 			(isString(t.description) || isNull(t.description)) &&
-			isString(t.createdAt) &&
+			isDate(t.createdAt) &&
 			isArray(t.capabilities) &&
 			t.capabilities.every(isTokenCapability) &&
-			(isString(t.expiresAt) || isNull(t.expiresAt))
+			(isDate(t.expiresAt) || isNull(t.expiresAt))
 		);
 	} catch {
 		return false;

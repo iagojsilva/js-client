@@ -10,6 +10,7 @@ export * from './creatable-token';
 export * from './error-response';
 export * from './is-token';
 export * from './is-token-capability';
+export * from './is-token-with-secret';
 export * from './raw-creatable-token';
 export * from './raw-token';
 export * from './raw-token-with-secret';
