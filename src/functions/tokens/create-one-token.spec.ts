@@ -6,7 +6,7 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { CreatableToken, isToken, TokenCapability } from '~/models';
+import { CreatableToken, isTokenWithSecret, TokenCapability } from '~/models';
 import { integrationTest, myCustomMatchers, TEST_BASE_API_CONTEXT } from '~/tests';
 import { makeCreateOneToken } from './create-one-token';
 
@@ -27,7 +27,7 @@ describe('createOneToken()', () => {
 			};
 
 			const token = await createOneToken(data);
-			expect(isToken(token)).toBeTrue();
+			expect(isTokenWithSecret(token)).toBeTrue();
 			expect(token).toPartiallyEqual(data);
 		}),
 	);

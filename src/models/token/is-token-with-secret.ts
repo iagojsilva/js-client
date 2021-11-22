@@ -7,7 +7,8 @@
  **************************************************************************/
 
 import { isString } from 'lodash';
-import { isToken, TokenWithSecret } from '~/main';
+import { isToken } from './is-token';
+import { TokenWithSecret } from './token-with-secret';
 
 export const isTokenWithSecret = (value: unknown): value is TokenWithSecret => {
 	try {

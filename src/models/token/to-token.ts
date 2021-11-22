@@ -16,5 +16,8 @@ export const toToken = (raw: RawToken): Token => ({
 	description: isEmpty(raw.description) ? null : raw.description,
 	capabilities: raw.capabilities,
 	createdAt: new Date(raw.createdAt),
-	expiresAt: isNil(raw.expiresAt) || isEmpty(raw.expiresAt) ? null : new Date(raw.expiresAt),
+	expiresAt:
+		isNil(raw.expiresAt) || isEmpty(raw.expiresAt) || raw.expiresAt === '0001-01-01T00:00:00Z'
+			? null
+			: new Date(raw.expiresAt),
 });
