@@ -7,15 +7,15 @@
  **************************************************************************/
 
 import { TokenCapability } from '~/main';
-import { ID } from '~/value-objects';
+import { RawUUID } from '~/value-objects';
 
 /**
- * Updatable token fields, in a friendly format.
+ * Updatable token fields.
  *
  * NOTE: It's ok to update the capabilitites of an existing token because if you have access to update a token, you also have access to create a new one with whatever capabilities you want.
  */
-export interface UpdatableToken {
-	id: ID;
+export interface RawUpdatableToken {
+	id: RawUUID;
 
 	/**
 	 * The name of the created token
@@ -23,22 +23,22 @@ export interface UpdatableToken {
 	 * @example
 	 * "My token"
 	 */
-	name?: string;
+	name: string;
 
 	/**
-	 * Optional token description.
+	 * Optional token description. May be null or an empty string.
 	 *
 	 * @example
 	 * "My new description"
 	 */
-	description?: string | null;
+	description: string | null;
 
-	capabilities?: Array<TokenCapability>;
+	capabilities: Array<TokenCapability>;
 
 	/**
-	 * Optional date indicating that the token should automatically expire.
+	 * Optional DateTime in RFC3339 indicating that the token should automatically expire.
 	 *
-	 * Setting this to `null` means it won't expire.
+	 * WARNING: If this property is not included (or is included and set to an empty string ""), that means it won't expire
 	 */
-	expiresAt?: Date | null;
+	expiresAt: string | null;
 }

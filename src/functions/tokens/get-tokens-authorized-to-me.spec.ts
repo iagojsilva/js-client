@@ -7,7 +7,7 @@
  **************************************************************************/
 
 import { random, sortBy } from 'lodash';
-import { CreatableToken, CreatableUser, isToken, Token, User } from '~/models';
+import { RawCreatableToken, CreatableUser, isToken, RawToken, User } from '~/models';
 import { integrationTest, TEST_BASE_API_CONTEXT } from '~/tests';
 import { makeLoginOneUser } from '../auth/login-one-user';
 import { makeCreateOneUser } from '../users';
@@ -24,11 +24,11 @@ describe('getTokensAuthorizedToMe()', () => {
 	const createOneUser = makeCreateOneUser(TEST_BASE_API_CONTEXT);
 	const login = makeLoginOneUser(TEST_BASE_API_CONTEXT);
 
-	let adminTokens: Array<Token>;
+	let adminTokens: Array<RawToken>;
 
 	let analyst: User;
 	let analystAuth: string;
-	let analystTokens: Array<Token>;
+	let analystTokens: Array<RawToken>;
 
 	beforeEach(async () => {
 		// Delete all tokens
@@ -38,7 +38,7 @@ describe('getTokensAuthorizedToMe()', () => {
 		await Promise.all(deletePromises);
 
 		// Create two tokens as admin
-		const creatableTokens: Array<CreatableToken> = [
+		const creatableTokens: Array<RawCreatableToken> = [
 			{
 				name: 'T1',
 				capabilities: ['KitWrite'],
@@ -64,7 +64,7 @@ describe('getTokensAuthorizedToMe()', () => {
 		analystAuth = await login(analyst.username, data.password);
 
 		// Create three tokens as analyst
-		const creatableTokens2: Array<CreatableToken> = [
+		const creatableTokens2: Array<RawCreatableToken> = [
 			{
 				name: 'T1',
 				capabilities: ['KitWrite'],

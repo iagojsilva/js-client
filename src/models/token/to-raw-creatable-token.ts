@@ -6,17 +6,12 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { Token } from './token';
+import { RawCreatableToken } from '~/main';
+import { CreatableToken } from './creatable-token';
 
-/**
- * Token containing the secret (only available when the token is created), in a friendly format.
- */
-export interface TokenWithSecret extends Token {
-	/**
-	 * The created token
-	 *
-	 * @example
-	 * "sdlkjslasdlkfjiowej132452389sdkljsd"
-	 */
-	token: string;
-}
+export const toRawCreatableToken = (creatable: CreatableToken): RawCreatableToken => ({
+	name: creatable.name,
+	description: creatable.description ?? null,
+	capabilities: creatable.capabilities,
+	expiresAt: creatable.expiresAt?.toISOString() ?? null,
+});

@@ -6,7 +6,7 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { CreatableToken } from '~/models';
+import { RawCreatableToken } from '~/models';
 import { integrationTest, TEST_BASE_API_CONTEXT } from '~/tests';
 import { makeCreateOneToken } from './create-one-token';
 import { makeDeleteOneToken } from './delete-one-token';
@@ -27,7 +27,7 @@ describe('deleteOneToken()', () => {
 		await Promise.all(deletePromises);
 
 		// Create two tokens
-		const creatableTokens: Array<CreatableToken> = [
+		const creatableTokens: Array<RawCreatableToken> = [
 			{
 				name: 'T1',
 				capabilities: ['KitWrite'],

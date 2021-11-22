@@ -9,11 +9,11 @@
 import { isArray, isNull, isString } from 'lodash';
 import { isNumericID, isUUID } from '~/value-objects';
 import { isTokenCapability } from './is-token-capability';
-import { TokenWithSecret } from './token-with-secret';
+import { RawTokenWithSecret } from './raw-token-with-secret';
 
-export const isToken = (value: unknown): value is TokenWithSecret => {
+export const isToken = (value: unknown): value is RawTokenWithSecret => {
 	try {
-		const t = <TokenWithSecret>value;
+		const t = <RawTokenWithSecret>value;
 		return (
 			isUUID(t.id) &&
 			isNumericID(t.uid) &&

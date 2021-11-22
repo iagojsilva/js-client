@@ -6,27 +6,27 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { ID } from '~/value-objects';
+import { RawNumericID, RawUUID } from '~/value-objects';
 import { TokenCapability } from './token-capability';
 
 /**
- * Information about an existing token, in a friendly format.
+ * Information about an existing token.
  *
  * WARNING: The token secret is not included. The token secret is only shown when it is created.
  */
-export interface Token {
-	id: ID;
+export interface RawToken {
+	id: RawUUID;
 
 	/**
 	 * The id of the token's owner
 	 */
-	userID: ID;
+	uid: RawNumericID;
 
 	/** The name of the created token */
 	name: string;
 
 	/**
-	 * An optional description of the created token.
+	 * An optional description of the created token. Might return null or an empty string.
 	 *
 	 * @example
 	 * "My resource read / write token"
@@ -36,14 +36,20 @@ export interface Token {
 	capabilities: Array<TokenCapability>;
 
 	/**
-	 * When this token was created
+	 * The date / time this token was created
+	 *
+	 * @example
+	 * "2032-04-23T18:25:43.511Z"
 	 */
-	createdAt: Date;
+	createdAt: string;
 
 	/**
-	 * Optional date indicating that the token should automatically expire.
+	 * Optional DateTime in RFC3339 indicating that the token should automatically expire.
 	 *
-	 * `null` means it won't expire.
+	 * WARNING: If this property is not included (or is included and set to an empty string ""), that means it won't expire
+	 *
+	 * @example
+	 * "2022-12-31T12:00:00Z"
 	 */
-	expiresAt: Date | null;
+	expiresAt: string | null | undefined;
 }

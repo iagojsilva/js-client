@@ -9,9 +9,9 @@
 import { TokenCapability } from './token-capability';
 
 /**
- * Minimum data required to create a token, in a friendly format.
+ * Minimum data required to create a token
  */
-export interface CreatableToken {
+export interface RawCreatableToken {
 	/**
 	 * A name for the token
 	 *
@@ -26,14 +26,17 @@ export interface CreatableToken {
 	 * @example
 	 * "My resource read / resource write token"
 	 */
-	description?: string | null;
+	description: string | null;
 
 	capabilities: Array<TokenCapability>;
 
 	/**
-	 * Optional date indicating that the token should automatically expire.
+	 * Optional DateTime in RFC3339 indicating that the token should automatically expire.
 	 *
-	 * Setting this to `null` (or `undefined`) means it won't expire.
+	 * WARNING: If this property is not included (or is included and set to an empty string ""), that means it won't expire
+	 *
+	 * @example
+	 * "2022-12-31T12:00:00Z"
 	 */
-	expiresAt?: Date | null;
+	expiresAt: string | null;
 }

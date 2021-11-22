@@ -6,11 +6,17 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-export * from './token-capability';
-export * from './updatable-token';
 export * from './creatable-token';
 export * from './error-response';
-export * from './token';
-export * from './token-with-secret';
 export * from './is-token';
 export * from './is-token-capability';
+export * from './raw-creatable-token';
+export * from './raw-token';
+export * from './raw-token-with-secret';
+export * from './raw-updatable-token';
+export * from './to-raw-creatable-token';
+export * from './to-raw-updatable-token';
+export * from './token';
+export * from './token-capability';
+export * from './token-with-secret';
+export * from './updatable-token';

@@ -6,7 +6,7 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { CreatableToken, isToken, Token, UpdatableToken } from '~/models';
+import { RawCreatableToken, isToken, RawToken, RawUpdatableToken } from '~/models';
 import { integrationTest, myCustomMatchers, TEST_BASE_API_CONTEXT } from '~/tests';
 import { makeCreateOneToken } from './create-one-token';
 import { makeDeleteOneToken } from './delete-one-token';
@@ -19,7 +19,7 @@ describe('updateOneToken()', () => {
 	const deleteOneToken = makeDeleteOneToken(TEST_BASE_API_CONTEXT);
 	const getAllTokens = makeGetAllTokens(TEST_BASE_API_CONTEXT);
 
-	let createdToken: Token;
+	let createdToken: RawToken;
 
 	beforeEach(async () => {
 		jasmine.addMatchers(myCustomMatchers);
@@ -31,14 +31,14 @@ describe('updateOneToken()', () => {
 		await Promise.all(deletePromises);
 
 		// Create one token
-		const data: CreatableToken = {
+		const data: RawCreatableToken = {
 			name: 'Current name',
 			capabilities: ['KitWrite'],
 		};
 		createdToken = await createOneToken(data);
 	});
 
-	const updateTests: Array<Omit<UpdatableToken, 'id'>> = [
+	const updateTests: Array<Omit<RawUpdatableToken, 'id'>> = [
 		{ name: 'New Name', capabilities: ['KitWrite'] },
 		{ name: 'New Name 2', capabilities: ['UserFileWrite'], description: 'New description' },
 		{ name: 'New Name 3', capabilities: ['SystemInfoRead'], description: 'New description 2' },
@@ -59,7 +59,7 @@ describe('updateOneToken()', () => {
 				const current = createdToken;
 				expect(isToken(current)).toBeTrue();
 
-				const data: UpdatableToken = { ..._data, id: current.id };
+				const data: RawUpdatableToken = { ..._data, id: current.id };
 				const updated = await updateOneToken(data);
 
 				expect(isToken(updated)).toBeTrue();

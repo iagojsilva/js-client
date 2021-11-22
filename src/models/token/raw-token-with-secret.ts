@@ -6,12 +6,12 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { Token } from './token';
+import { RawToken } from './raw-token';
 
 /**
- * Token containing the secret (only available when the token is created), in a friendly format.
+ * Token containing the secret (only available when the token is created)
  */
-export interface TokenWithSecret extends Token {
+export interface RawTokenWithSecret extends RawToken {
 	/**
 	 * The created token
 	 *

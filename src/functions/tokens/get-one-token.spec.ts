@@ -6,7 +6,7 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { CreatableToken, isToken, TokenWithSecret } from '~/models';
+import { RawCreatableToken, isToken, RawTokenWithSecret } from '~/models';
 import { integrationTest, TEST_BASE_API_CONTEXT } from '~/tests';
 import { makeCreateOneToken } from './create-one-token';
 import { makeDeleteOneToken } from './delete-one-token';
@@ -19,7 +19,7 @@ describe('getOneToken()', () => {
 	const getAllTokens = makeGetAllTokens(TEST_BASE_API_CONTEXT);
 	const deleteOneToken = makeDeleteOneToken(TEST_BASE_API_CONTEXT);
 
-	let createdToken: TokenWithSecret;
+	let createdToken: RawTokenWithSecret;
 
 	beforeEach(async () => {
 		// Delete all tokens
@@ -29,7 +29,7 @@ describe('getOneToken()', () => {
 		await Promise.all(deletePromises);
 
 		// Create a Token
-		const data: CreatableToken = {
+		const data: RawCreatableToken = {
 			name: 'T1',
 			description: 'My T1',
 			capabilities: ['AttachSearch', 'KitWrite'],

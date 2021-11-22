@@ -6,7 +6,7 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { Token, UpdatableToken } from '~/models';
+import { RawToken, RawUpdatableToken } from '~/models';
 import {
 	APIContext,
 	buildHTTPRequestWithAuthFromContext,
@@ -19,7 +19,7 @@ import { makeGetOneToken } from './get-one-token';
 export const makeUpdateOneToken = (context: APIContext) => {
 	const getOneToken = makeGetOneToken(context);
 
-	return async (data: UpdatableToken): Promise<Token> => {
+	return async (data: RawUpdatableToken): Promise<RawToken> => {
 		const templatePath = '/api/tokens/{tokenID}?admin=true';
 		const url = buildURL(templatePath, { ...context, protocol: 'http', pathParams: { tokenID: data.id } });
 
@@ -32,7 +32,7 @@ export const makeUpdateOneToken = (context: APIContext) => {
 			const req = buildHTTPRequestWithAuthFromContext(context, baseRequestOptions);
 
 			const raw = await context.fetch(url, { ...req, method: 'PUT' });
-			const tokenInfoWithoutSecret = await parseJSONResponse<Token>(raw);
+			const tokenInfoWithoutSecret = await parseJSONResponse<RawToken>(raw);
 			return tokenInfoWithoutSecret;
 		} catch (err) {
 			if (err instanceof Error) throw err;
