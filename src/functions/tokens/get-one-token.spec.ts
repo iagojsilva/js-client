@@ -6,6 +6,7 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
+import { omit } from 'lodash';
 import { CreatableToken, isToken, TokenCapability, TokenWithSecret } from '~/models';
 import { integrationTest, TEST_BASE_API_CONTEXT } from '~/tests';
 import { makeCreateOneToken } from './create-one-token';
@@ -42,7 +43,7 @@ describe('getOneToken()', () => {
 		integrationTest(async () => {
 			const token = await getOneToken(createdToken.id);
 			expect(isToken(token)).toBeTrue();
-			expect(token).toEqual(createdToken);
+			expect(token).toEqual(omit(createdToken, ['token']));
 		}),
 	);
 

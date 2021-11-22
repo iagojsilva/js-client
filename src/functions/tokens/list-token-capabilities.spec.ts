@@ -10,7 +10,7 @@ import { isTokenCapability } from '~/models';
 import { integrationTest, TEST_BASE_API_CONTEXT } from '~/tests';
 import { makeListTokenCapabilities } from './list-token-capabilities';
 
-describe('ListTokenCapabilities()', () => {
+describe('listTokenCapabilities()', () => {
 	const listTokenCapabilities = makeListTokenCapabilities(TEST_BASE_API_CONTEXT);
 
 	it(

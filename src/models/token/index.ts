@@ -7,7 +7,6 @@
  **************************************************************************/
 
 export * from './creatable-token';
-export * from './error-response';
 export * from './is-token';
 export * from './is-token-capability';
 export * from './is-token-with-secret';

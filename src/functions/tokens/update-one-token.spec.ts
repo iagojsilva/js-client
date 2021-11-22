@@ -45,7 +45,6 @@ describe('updateOneToken()', () => {
 		{ description: null },
 
 		{ capabilities: [TokenCapability.Stats] },
-		{ capabilities: [] },
 		{ capabilities: [TokenCapability.SystemInfoRead, TokenCapability.SearchHistory, TokenCapability.SearchAllHistory] },
 
 		{ expiresAt: new Date() },

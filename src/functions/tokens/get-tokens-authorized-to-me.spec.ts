@@ -6,7 +6,7 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { random, sortBy } from 'lodash';
+import { omit, random, sortBy } from 'lodash';
 import { CreatableToken, CreatableUser, isToken, Token, TokenCapability, User } from '~/models';
 import { integrationTest, TEST_BASE_API_CONTEXT } from '~/tests';
 import { makeLoginOneUser } from '../auth/login-one-user';
@@ -49,7 +49,7 @@ describe('getTokensAuthorizedToMe()', () => {
 			},
 		];
 		const createPromises = creatableTokens.map(creatable => createOneToken(creatable));
-		adminTokens = await Promise.all(createPromises);
+		adminTokens = (await Promise.all(createPromises)).map(t => omit(t, ['token']));
 
 		// Creates an analyst
 		const userSeed = random(0, Number.MAX_SAFE_INTEGER).toString();
@@ -85,7 +85,7 @@ describe('getTokensAuthorizedToMe()', () => {
 		});
 
 		const createPromises2 = creatableTokens2.map(creatable => createOneTokenAsAnalyst(creatable));
-		analystTokens = await Promise.all(createPromises2);
+		analystTokens = (await Promise.all(createPromises2)).map(t => omit(t, ['token']));
 	});
 
 	it(
