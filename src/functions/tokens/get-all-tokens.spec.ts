@@ -20,7 +20,7 @@ describe('getAllTokens()', () => {
 	beforeEach(async () => {
 		// Delete all tokens
 		const currentTokens = await getAllTokens();
-		const currentTokenIDs = currentTokens.map(m => m.id);
+		const currentTokenIDs = currentTokens.map(t => t.id);
 		const deletePromises = currentTokenIDs.map(TokenID => deleteOneToken(TokenID));
 		await Promise.all(deletePromises);
 	});
@@ -31,11 +31,11 @@ describe('getAllTokens()', () => {
 			// Create two tokens
 			const creatableTokens: Array<CreatableToken> = [
 				{
-					name: 'Q1',
+					name: 'T1',
 					capabilities: [TokenCapability.KitWrite],
 				},
 				{
-					name: 'Q2',
+					name: 'T2',
 					capabilities: [TokenCapability.KitWrite],
 				},
 			];

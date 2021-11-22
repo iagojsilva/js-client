@@ -39,14 +39,17 @@ describe('updateOneToken()', () => {
 	});
 
 	const updateTests: Array<Omit<UpdatableToken, 'id'>> = [
-		{ name: 'New Name', capabilities: [TokenCapability.KitWrite] },
-		{ name: 'New Name 2', capabilities: [TokenCapability.UserFileWrite], description: 'New description' },
-		{ name: 'New Name 3', capabilities: [TokenCapability.SystemInfoRead], description: 'New description 2' },
-		{ name: 'New Name 3', capabilities: [TokenCapability.Stats] },
-		{ name: 'New Name 4', capabilities: [TokenCapability.SetSearchGroup] },
-		{ name: 'New Name 5', capabilities: [TokenCapability.SearchHistory] },
-		{ name: 'New Name 6', capabilities: [TokenCapability.SearchGroupHistory], description: 'New description 3' },
-		{ name: 'New Name 7', capabilities: [TokenCapability.SearchAllHistory], description: 'New description 4' },
+		{ name: 'New Name' },
+
+		{ description: 'New description' },
+		{ description: null },
+
+		{ capabilities: [TokenCapability.Stats] },
+		{ capabilities: [] },
+		{ capabilities: [TokenCapability.SystemInfoRead, TokenCapability.SearchHistory, TokenCapability.SearchAllHistory] },
+
+		{ expiresAt: new Date() },
+		{ expiresAt: null },
 	];
 	updateTests.forEach((_data, testIndex) => {
 		const updatedFields = Object.keys(_data);

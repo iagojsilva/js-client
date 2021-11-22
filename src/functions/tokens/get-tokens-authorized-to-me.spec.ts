@@ -33,7 +33,7 @@ describe('getTokensAuthorizedToMe()', () => {
 	beforeEach(async () => {
 		// Delete all tokens
 		const currentTokens = await getAllTokens();
-		const currentTokenIDs = currentTokens.map(m => m.id);
+		const currentTokenIDs = currentTokens.map(t => t.id);
 		const deletePromises = currentTokenIDs.map(TokenID => deleteOneToken(TokenID));
 		await Promise.all(deletePromises);
 
@@ -88,11 +88,11 @@ describe('getTokensAuthorizedToMe()', () => {
 		analystTokens = await Promise.all(createPromises2);
 	});
 
-	xit(
-		'Should returns all my tokens',
+	it(
+		'Returns all my tokens',
 		integrationTest(async () => {
 			const actualAdminTokens = await getTokensAuthorizedToMe();
-			expect(sortBy(actualAdminTokens, m => m.id)).toEqual(sortBy(adminTokens, m => m.id));
+			expect(sortBy(actualAdminTokens, t => t.id)).toEqual(sortBy(adminTokens, t => t.id));
 			for (const token of actualAdminTokens) expect(isToken(token)).toBeTrue();
 
 			const getTokensAuthorizedToAnalyst = makeGetTokensAuthorizedToMe({
@@ -101,11 +101,11 @@ describe('getTokensAuthorizedToMe()', () => {
 			});
 
 			const actualAnalystTokens = await getTokensAuthorizedToAnalyst();
-			expect(sortBy(actualAnalystTokens, m => m.id)).toEqual(sortBy(analystTokens, m => m.id));
+			expect(sortBy(actualAnalystTokens, t => t.id)).toEqual(sortBy(analystTokens, t => t.id));
 			for (const token of actualAnalystTokens) expect(isToken(token)).toBeTrue();
 
 			const allTokens = await getAllTokens();
-			expect(sortBy(allTokens, m => m.id)).toEqual(sortBy([...analystTokens, ...adminTokens], m => m.id));
+			expect(sortBy(allTokens, t => t.id)).toEqual(sortBy([...analystTokens, ...adminTokens], t => t.id));
 			for (const token of allTokens) expect(isToken(token)).toBeTrue();
 		}),
 	);

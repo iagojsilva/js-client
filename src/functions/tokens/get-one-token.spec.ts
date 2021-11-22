@@ -38,7 +38,7 @@ describe('getOneToken()', () => {
 	});
 
 	it(
-		'Should returns a token',
+		'Should return a token',
 		integrationTest(async () => {
 			const token = await getOneToken(createdToken.id);
 			expect(isToken(token)).toBeTrue();
@@ -47,7 +47,7 @@ describe('getOneToken()', () => {
 	);
 
 	it(
-		"Should returns an error if the token doesn't exist",
+		"Should return an error if the token doesn't exist",
 		integrationTest(async () => {
 			await expectAsync(getOneToken('non-existent')).toBeRejected();
 		}),

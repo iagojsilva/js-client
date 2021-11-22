@@ -22,8 +22,8 @@ describe('deleteOneToken()', () => {
 	beforeEach(async () => {
 		// Delete all tokens
 		const currentTokens = await getAllTokens();
-		const currentTokenIDs = currentTokens.map(m => m.id);
-		const deletePromises = currentTokenIDs.map(TokenID => deleteOneToken(TokenID));
+		const currentTokenIDs = currentTokens.map(t => t.id);
+		const deletePromises = currentTokenIDs.map(tokenID => deleteOneToken(tokenID));
 		await Promise.all(deletePromises);
 
 		// Create two tokens
@@ -45,7 +45,7 @@ describe('deleteOneToken()', () => {
 		'Should delete a token',
 		integrationTest(async () => {
 			const currentTokens = await getAllTokens();
-			const currentTokenIDs = currentTokens.map(m => m.id);
+			const currentTokenIDs = currentTokens.map(t => t.id);
 			expect(currentTokenIDs.length).toBe(2);
 
 			const deleteTokenID = currentTokenIDs[0];
@@ -53,7 +53,7 @@ describe('deleteOneToken()', () => {
 			await expectAsync(getOneToken(deleteTokenID)).toBeRejected();
 
 			const remainingTokens = await getAllTokens();
-			const remainingTokenIDs = remainingTokens.map(m => m.id);
+			const remainingTokenIDs = remainingTokens.map(t => t.id);
 			expect(remainingTokenIDs).not.toContain(deleteTokenID);
 			expect(remainingTokenIDs.length).toBe(1);
 		}),

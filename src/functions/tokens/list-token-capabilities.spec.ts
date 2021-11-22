@@ -6,7 +6,6 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
-import { isBoolean } from 'lodash';
 import { isTokenCapability } from '~/models';
 import { integrationTest, TEST_BASE_API_CONTEXT } from '~/tests';
 import { makeListTokenCapabilities } from './list-token-capabilities';
@@ -18,8 +17,8 @@ describe('ListTokenCapabilities()', () => {
 		'Should returns all token capabilities',
 		integrationTest(async () => {
 			const tokensCapabilities = await listTokenCapabilities();
-			const isTokensCapabilities = tokensCapabilities.map(isTokenCapability).every(isBoolean);
-			expect(isTokensCapabilities).toBeTrue();
+			const areTokenCapabilities = tokensCapabilities.every(isTokenCapability);
+			expect(areTokenCapabilities).toBeTrue();
 		}),
 	);
 });
