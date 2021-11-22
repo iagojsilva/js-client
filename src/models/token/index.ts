@@ -16,6 +16,8 @@ export * from './raw-token-with-secret';
 export * from './raw-updatable-token';
 export * from './to-raw-creatable-token';
 export * from './to-raw-updatable-token';
+export * from './to-token';
+export * from './to-token-with-secret';
 export * from './token';
 export * from './token-capability';
 export * from './token-with-secret';
