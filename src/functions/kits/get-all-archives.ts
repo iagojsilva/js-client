@@ -19,6 +19,6 @@ export const makeGetKitArchives = (context: APIContext) => {
 
 		const raw = await context.fetch(url, { ...req, method: 'GET' });
 		const rawRes = await parseJSONResponse<Array<RawKitArchive>>(raw);
-		return isArray(rawRes) ? rawRes.map(toKitArchive) : [];
+		return isArray(rawRes) ? Promise.all(rawRes.map(toKitArchive(context))) : [];
 	};
 };
