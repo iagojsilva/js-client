@@ -6,6 +6,8 @@
  * MIT license. See the LICENSE file for details.
  **************************************************************************/
 
+import { makeGetAllScheduledTasks } from '~/functions/scheduled-tasks/get-all-scheduled-tasks';
+import { APIContext } from '~/functions/utils';
 import { NumericID, RawNumericID, RawUUID, UUID } from '~/value-objects';
 import { isScheduledQuery, isScheduledScript } from './../scheduled-task';
 import { toVersion } from './../version';
@@ -13,7 +15,7 @@ import { DeployRules, KitArchive } from './kit-archive';
 import { RawDeployRules, RawKitArchive } from './raw-kit-archive';
 import { toConfigMacros } from './to-config-macro';
 
-export const toKitArchive = (raw: RawKitArchive): KitArchive => {
+export const toKitArchive = (context: APIContext) => async (raw: RawKitArchive): Promise<KitArchive> => {
 	const scriptDeployRules = Object.entries(raw.ScriptDeployRules ?? {}).reduce((acc, cur) => {
 		acc[cur[0]] = toDeployRules(cur[1]);
 		return acc;
@@ -22,9 +24,19 @@ export const toKitArchive = (raw: RawKitArchive): KitArchive => {
 	// previous builds may not have a date so we make it null if it starts with 0001
 	const buildDate = raw.BuildDate.indexOf('0001') === 0 ? null : new Date(raw.BuildDate);
 
-	const scheduled = raw.ScheduledSearches ?? [];
-	const scripts = scheduled.filter(isScheduledScript);
-	const scheduledSearches = scheduled.filter(isScheduledQuery);
+	const scheduled = new Set((raw.ScheduledSearches ?? []).map(id => id.toString()));
+
+	const getAll = makeGetAllScheduledTasks(context);
+	const scheduledTasks = await getAll();
+
+	const scheduledScripts = scheduledTasks
+		.filter(isScheduledScript)
+		.filter(script => scheduled.has(script.id))
+		.map(script => script.id);
+	const scheduledSearches = scheduledTasks
+		.filter(isScheduledQuery)
+		.filter(search => scheduled.has(search.id))
+		.map(search => search.id);
 
 	const embeddedItems = (raw.EmbeddedItems ?? []).map(item => ({
 		name: item.Name,
@@ -62,8 +74,8 @@ export const toKitArchive = (raw: RawKitArchive): KitArchive => {
 		playbooks: toStringArray(raw.Playbooks ?? []),
 		resources: toStringArray(raw.Resources ?? []),
 		savedQueries: toStringArray(raw.SearchLibraries ?? []),
-		scheduledSearches: toStringArray(scheduledSearches),
-		scripts: toStringArray(scripts),
+		scheduledSearches: scheduledSearches,
+		scripts: scheduledScripts,
 		templates: toStringArray(raw.Templates ?? []),
 	};
 };
