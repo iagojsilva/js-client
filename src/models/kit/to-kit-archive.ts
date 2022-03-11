@@ -24,18 +24,18 @@ export const toKitArchive = (context: APIContext) => async (raw: RawKitArchive):
 	// previous builds may not have a date so we make it null if it starts with 0001
 	const buildDate = raw.BuildDate.indexOf('0001') === 0 ? null : new Date(raw.BuildDate);
 
-	const scheduled = new Set((raw.ScheduledSearches ?? []).map(id => id.toString()));
+	const scheduledIDs = new Set((raw.ScheduledSearches ?? []).map(id => id.toString()));
 
 	const getAll = makeGetAllScheduledTasks(context);
 	const scheduledTasks = await getAll();
 
-	const scheduledScripts = scheduledTasks
+	const scheduledScriptsIDs = scheduledTasks
 		.filter(isScheduledScript)
-		.filter(script => scheduled.has(script.id))
+		.filter(script => scheduledIDs.has(script.id))
 		.map(script => script.id);
-	const scheduledSearches = scheduledTasks
+	const scheduledSearchesIDs = scheduledTasks
 		.filter(isScheduledQuery)
-		.filter(search => scheduled.has(search.id))
+		.filter(search => scheduledIDs.has(search.id))
 		.map(search => search.id);
 
 	const embeddedItems = (raw.EmbeddedItems ?? []).map(item => ({
@@ -74,8 +74,8 @@ export const toKitArchive = (context: APIContext) => async (raw: RawKitArchive):
 		playbooks: toStringArray(raw.Playbooks ?? []),
 		resources: toStringArray(raw.Resources ?? []),
 		savedQueries: toStringArray(raw.SearchLibraries ?? []),
-		scheduledSearches: scheduledSearches,
-		scripts: scheduledScripts,
+		scheduledSearches: scheduledSearchesIDs,
+		scripts: scheduledScriptsIDs,
 		templates: toStringArray(raw.Templates ?? []),
 	};
 };
